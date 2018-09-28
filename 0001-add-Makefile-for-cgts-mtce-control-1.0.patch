@@ -1,0 +1,38 @@
+From 56b0536b286e94dc186afdab117a47cc8595af55 Mon Sep 17 00:00:00 2001
+From: yhu6 <yong.hu@intel.com>
+Date: Thu, 11 Oct 2018 15:03:36 +0800
+Subject: [PATCH] add Makefile for cgts-mtce-control-1.0
+
+---
+ mtce-control/cgts-mtce-control-1.0/Makefile | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+ create mode 100644 mtce-control/cgts-mtce-control-1.0/Makefile
+
+diff --git a/mtce-control/cgts-mtce-control-1.0/Makefile b/mtce-control/cgts-mtce-control-1.0/Makefile
+new file mode 100644
+index 0000000..ba353f2
+--- /dev/null
++++ b/mtce-control/cgts-mtce-control-1.0/Makefile
+@@ -0,0 +1,19 @@
++SOURCE1 = goenabled
++SOURCE2 = LICENSE
++
++local_etc_pmond = $(_sysconfdir)/pmond.d
++local_etc_goenabledd = $(_sysconfdir)/goenabled.d
++
++.PHONY: default
++
++install:
++	# Controller-Only Init Scripts
++	install -m 755 -p -D scripts/$(SOURCE1) $(buildroot)/$(_sysconfdir)/init.d/goenabledControl
++	# Controller-Only Process Monitor Config files
++	install -m 755 -d $(buildroot)/$(local_etc_pmond)
++	# Controller-Only Go Enabled Test
++	install -m 755 -d $(buildroot)/$(local_etc_goenabledd)
++	# for license
++	install -m 755 -d $(buildroot)/$(_datarootdir)/licenses/mtce-control-1.0
++	install -p -D -m 600 scripts/$(SOURCE2) $(buildroot)/$(_datarootdir)/licenses/mtce-control-1.0/LICENSE
++
+-- 
+2.19.0
+
